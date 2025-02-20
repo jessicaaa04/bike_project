@@ -1,5 +1,4 @@
-mapboxgl.accessToken = 'pk.eyJ1IjoibWlub3VpdWkiLCJhIjoiY203ZDFyam0wMHd4ODJscG5zdng3YnYyNyJ9.V5gUL9ivzBE4X8VImnfJ9Qpk.eyJ1IjoibWlub3VpdWkiLCJhIjoiY203ZDFyam0wMHd4ODJscG5zdng3YnYyNyJ9.V5gUL9ivzBE4X8VImnfJ9Q'
-// Initialize the map
+mapboxgl.accessToken = 'pk.eyJ1IjoibWlub3VpdWkiLCJhIjoiY203ZDFyam0wMHd4ODJscG5zdng3YnYyNyJ9.V5gUL9ivzBE4X8VImnfJ9Qpk.eyJ1IjoibWlub3VpdWkiLCJhIjoiY203ZDJtZmM2MGFndDJrcHR3ZnYyanVobCJ9.zdkwluy8fJVDDbho78Myyg'
 const map = new mapboxgl.Map({
     container: 'map', // ID of the div where the map will render
     style: 'mapbox://styles/mapbox/streets-v12', // Map style
