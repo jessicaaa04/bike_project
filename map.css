@@ -1,52 +1,213 @@
-/* Reset default margins/padding */
-* {
-    box-sizing: border-box;
-  }
-  
-  html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    font-family: Arial, sans-serif; /* Customize your font here */
-    background-color: #f8f9fa;     /* Light background color (optional) */
-  }
-  
-  /* Header */
-  header {
-    background-color: #ffffff; /* White background */
-    padding: 1rem;
-    text-align: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow under header */
-  }
-  
-  header h1 {
-    margin: 0;
-    font-size: 1.8rem;
-  }
-  
-  /* Main Content Area */
-  main {
-    max-width: 800px;  /* Constrain content width for readability */
-    margin: 0 auto;    /* Center the main content */
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;         /* Spacing between paragraph and map */
-  }
-  
-  /* Paragraph Text */
-  main p {
-    font-size: 1.1rem;
-    line-height: 1.5;
-    text-align: center; /* Center the description text */
-    margin: 0;
-  }
-  
-  /* Map Container */
-  #map {
-    width: 100%;
-    height: 500px;               /* Fixed height for the map */
-    border-radius: 8px;          /* Rounded corners (optional) */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Subtle shadow */
-  }
-  
+/* General Page Styling */
+body {
+  font: 100%/1.5 system-ui, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Header Styling */
+header {
+  background-color: #ffffff;
+  padding: 1rem;
+  text-align: left;  /* Align text to start of page */
+  width: 80%;  /* Match width of main content */
+  max-width: 900px;
+}
+
+/* Main Content Styling */
+main {
+  width: 80%;  /* Same as header */
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align text to the left */
+}
+
+/* Paragraph Text Styling */
+main p {
+  font-size: 1.1rem;
+  line-height: 1.5;
+  text-align: left;  /* Align text to the left */
+  margin: 0;
+}
+
+/* Map Container */
+#map {
+  position: relative;
+  width: 80%;  /* Same as header */
+  max-width: 900px;
+  height: 70vh; /* Keep it responsive */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 1rem;
+}
+
+/* Ensure the SVG is properly layered */
+#map svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Ensure circles remain interactive */
+circle {
+  pointer-events: auto;
+  cursor: pointer;
+  fill: steelblue;
+  fill-opacity: 0.6;
+  stroke: white;
+  stroke-width: 1px;
+}
+
+/* Tooltip Styling */
+.tooltip {
+  position: absolute;
+  background: white;
+  color: black;
+  padding: 6px 10px;
+  font-size: 12px;
+  border-radius: 4px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  pointer-events: none;
+  visibility: hidden;
+  z-index: 1000;
+}
+
+header > h1 {
+  grid-column: 1; 
+  grid-row: 1; 
+  margin: 0;
+}
+
+header > span {
+  grid-column: 2;
+  grid-row: 1; 
+  justify-self: end; 
+  display: flex;       
+  align-items: center;
+}
+
+header > label {
+  grid-column: 2; 
+  grid-row: 2; 
+  justify-self: end; 
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+}
+
+em {
+  color: gray;
+  font-style: italic;
+}
+
+#time-slider {
+  width: 300px;
+  max-width: 500px; 
+}
+
+/* Define colors for departures and arrivals */
+:root {
+  --color-departures: steelblue;
+  --color-arrivals: darkorange;
+}
+
+/* Increase opacity */
+circle {
+  fill-opacity: 0.7;  /* Make circles more visible */
+  stroke: white;
+  stroke-width: 1px;
+}
+
+/* Define departure and arrival colors */
+:root {
+  --color-departures: steelblue;
+  --color-arrivals: darkorange;
+}
+
+/* Apply color mix to both circles and legend */
+circle,
+.legend > div {
+  --color: color-mix(
+    in oklch,
+    var(--color-departures) calc(100% * var(--departure-ratio)),
+    var(--color-arrivals)
+  );
+  background-color: var(--color);
+  fill: var(--color);
+}
+
+/* Legend container */
+.legend {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-block: 15px; /* Add spacing */
+}
+
+/* Individual legend items */
+.legend > div {
+  flex: 1;
+  padding: 5px 15px;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: bold;
+  color: white; /* Ensure text contrast */
+}
+
+/* Legend Container */
+.legend {
+  display: flex;
+  width: 80%; /* Match the map width */
+  max-width: 900px;
+  margin: 10px auto 0; /* Center align */
+  gap: 1px;
+}
+
+/* Legend Container */
+.legend {
+  display: flex;
+  width: 80%;  /* Match the map width */
+  max-width: 900px; /* Keep it aligned */
+  margin: 10px auto 0; /* Center under the map */
+  gap: 1px;
+}
+
+/* Legend Blocks */
+.legend-item {
+  flex: 1;  /* Equal width for all */
+  padding: 10px;
+  font-weight: bold;
+  color: white;
+}
+
+/* Align Text */
+.legend-item.left {
+  background-color: steelblue;
+  text-align: left;
+  padding-left: 15px;
+}
+
+.legend-item.center {
+  background-color: #a06ab4;
+  text-align: center;
+}
+
+.legend-item.right {
+  background-color: darkorange;
+  text-align: right;
+  padding-right: 15px;
+}
